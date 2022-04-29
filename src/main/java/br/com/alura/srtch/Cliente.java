@@ -1,6 +1,7 @@
 package br.com.alura.srtch;
 
 import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvRecurse;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -18,29 +19,7 @@ public class Cliente {
   @CsvBindByName
   private String cpf;
 
-  @CsvBindByName
-  private String telefone;
 
-  @CsvBindByName
-  private String email;
-
-  @CsvBindByName
-  private String rua;
-
-  @CsvBindByName
-  private String numero;
-
-  @CsvBindByName
-  private String complemento;
-
-  @CsvBindByName
-  private String bairro;
-
-  @CsvBindByName
-  private String cidade;
-
-  @CsvBindByName
-  private String estado;
 
   @CsvBindByName
   private String profissao;
@@ -50,6 +29,32 @@ public class Cliente {
 
   @CsvBindByName
   private StatusCliente status;
+
+
+
+  @CsvRecurse
+  @OneToOne(cascade = CascadeType.PERSIST)
+  @JoinColumn(name = "endereco", referencedColumnName = "id_endereco")
+  private Endereco endereco;
+
+
+  public Endereco getEndereco() {
+    return endereco;
+  }
+  public Cliente() {
+
+  }
+
+  public Cliente( String nome, String cpf, String profissao, BigDecimal renda,
+                  StatusCliente status, Endereco endereco) {
+
+    this.nome = nome;
+    this.cpf = cpf;
+    this.profissao = profissao;
+    this.renda = renda;
+    this.status = status;
+    this.endereco = endereco;
+  }
 
 
 
@@ -69,69 +74,7 @@ public class Cliente {
     this.cpf = cpf;
   }
 
-  public String getTelefone() {
-    return telefone;
-  }
 
-  public void setTelefone(String telefone) {
-    this.telefone = telefone;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  public String getRua() {
-    return rua;
-  }
-
-  public void setRua(String rua) {
-    this.rua = rua;
-  }
-
-  public String getNumero() {
-    return numero;
-  }
-
-  public void setNumero(String numero) {
-    this.numero = numero;
-  }
-
-  public String getComplemento() {
-    return complemento;
-  }
-
-  public void setComplemento(String complemento) {
-    this.complemento = complemento;
-  }
-
-  public String getBairro() {
-    return bairro;
-  }
-
-  public void setBairro(String bairro) {
-    this.bairro = bairro;
-  }
-
-  public String getCidade() {
-    return cidade;
-  }
-
-  public void setCidade(String cidade) {
-    this.cidade = cidade;
-  }
-
-  public String getEstado() {
-    return estado;
-  }
-
-  public void setEstado(String estado) {
-    this.estado = estado;
-  }
 
   public String getProfissao() {
     return profissao;
@@ -162,16 +105,16 @@ public class Cliente {
     return "Cliente{" +
         "nome='" + nome + '\'' +
         ", cpf='" + cpf + '\'' +
-        ", telefone='" + telefone + '\'' +
-        ", email='" + email + '\'' +
-        ", rua='" + rua + '\'' +
-        ", numero='" + numero + '\'' +
-        ", complemento='" + complemento + '\'' +
-        ", bairro='" + bairro + '\'' +
-        ", cidade='" + cidade + '\'' +
-        ", estado='" + estado + '\'' +
+        ", telefone='" + getEndereco().getTelefone() + '\'' +
+        ", email='" + getEndereco().getEmail() + '\'' +
+        ", rua='" + getEndereco().getRua() + '\'' +
+        ", numero='" + getEndereco().getNumero() + '\'' +
+        ", complemento='" + getEndereco().getComplemento() + '\'' +
+        ", bairro='" + getEndereco().getBairro() + '\'' +
+        ", cidade='" + getEndereco().getCidade() + '\'' +
+        ", estado='" + getEndereco().getEstado() + '\'' +
         ", profissao='" + profissao + '\'' +
-        ", renda=" + renda +
+        ", renda=" + renda + '\'' +
         ", status=" + status +
         '}';
   }

@@ -28,6 +28,7 @@ public class Main {
 
     List<Cliente> clientes;
 
+
     if (arquivo.endsWith(".csv")) {
       try {
         Reader reader = new FileReader(arquivo);
@@ -82,7 +83,7 @@ public class Main {
       System.out.printf("- o estado %s tem %d cliente(s) cadastrado(s).\n", estado, clientesDoEstado.size());
     }
 
-
+    System.out.println("------------------------ Inicio");
     for (Cliente cliente : clientes) {
       ClienteDAO clienteDao0 = new ClienteDAO(em);
       em.getTransaction().begin();
@@ -96,8 +97,19 @@ public class Main {
 
     Cliente c = clienteDao.buscarPorId(1l);
     System.out.println(c.getNome());
+    System.out.println("------------------------");
 
+    List<Cliente> todosClientesPorStatusA = clienteDao.buscarPorStatus(StatusCliente.ATIVO);
+    todosClientesPorStatusA.forEach(p2 -> System.out.println(p2.getNome()));
+    System.out.println("------------------------");
 
+    List<Cliente> todosClientesPorStatusS = clienteDao.buscarPorStatus(StatusCliente.SUSPENSO);
+    todosClientesPorStatusS.forEach(p2 -> System.out.println(p2.getNome()));
+    System.out.println("------------------------");
+
+    List<Cliente> todosClientesPorNome = clienteDao.buscarPorNomeCliente("Osvaldo Nicolas Isaac Corte Real");
+    todosClientesPorNome.forEach(p2 -> System.out.println(p2.getNome()));
+    System.out.println("------------------------ Fim ");
 
   }
 
