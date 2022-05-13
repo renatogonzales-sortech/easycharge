@@ -12,6 +12,7 @@ public class Cliente {
     @Column(length=10)
     private Long id;
 
+
     @Column(nullable=false, length=10)
     private BigDecimal renda;
 
@@ -30,12 +31,18 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(BigDecimal renda, DadosPessoais dadosPessoais, Endereco endereco, StatusCliente status) {
+    public Cliente(String nome,
+                   BigDecimal renda,
+                   //DadosPessoais dadosPessoais,
+                   //Endereco endereco,
+                   StatusCliente status) {
+        this.dadosPessoais.getNome();
         this.renda = renda;
-        this.dadosPessoais = dadosPessoais;
-        this.endereco = endereco;
+       // this.dadosPessoais = dadosPessoais;
+       // this.endereco = endereco;
         this.status = status;
     }
+
 
     public void alteraStatus(){
         if(this.status.equals(StatusCliente.SUSPENSO)){
@@ -99,4 +106,5 @@ public class Cliente {
                 ", status=" + status +
                 '}';
     }
+
 }

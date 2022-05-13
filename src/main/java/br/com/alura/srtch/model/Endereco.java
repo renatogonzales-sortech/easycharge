@@ -24,6 +24,8 @@ public class Endereco{
     @Column(nullable=false, length=100)
     private String estado;
 
+    private String local = cidade + "/" + estado;
+
     public Endereco() {
     }
 
@@ -34,6 +36,8 @@ public class Endereco{
         this.cidade = cidade;
         this.estado = estado;
     }
+
+
 
     public String getRua() {
         return rua;
@@ -81,6 +85,14 @@ public class Endereco{
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public String getLocal() {
+        return local;
+    }
+
+    public void setLocal(String local) {
+        this.local = local;
     }
 
     @Override

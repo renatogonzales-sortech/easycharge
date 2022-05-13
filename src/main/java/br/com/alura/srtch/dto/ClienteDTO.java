@@ -1,12 +1,19 @@
 package br.com.alura.srtch.dto;
 
+import br.com.alura.srtch.model.Cliente;
+import br.com.alura.srtch.model.StatusCliente;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class ClienteDTO {
+
 
     private Long id;
 
@@ -40,6 +47,10 @@ public class ClienteDTO {
 
     @NotBlank
     private String estado;
+
+    @NotBlank
+    private String local = cidade + "/" + estado;
+
 
     @NotBlank
     private String profissao;
@@ -150,6 +161,14 @@ public class ClienteDTO {
         this.estado = estado;
     }
 
+    public String getLocal() {
+        return local;
+    }
+
+    public void setLocal(String local) {
+        this.local = local;
+    }
+
     public void setProfissao(String profissao) {
         this.profissao = profissao;
     }
@@ -162,4 +181,17 @@ public class ClienteDTO {
         this.status = status;
     }
 
+    public ClienteDTO(Cliente cliente) {
+        this.id = cliente.getId();
+        this.nome = cliente.getDadosPessoais().getNome();
+        this.cpf = cliente.getDadosPessoais().getCpf();
+        this.telefone = cliente.getDadosPessoais().getTelefone();
+        this.local = cliente.getEndereco().getLocal();
+        this.renda = cliente.getRenda();
+        this.status = String.valueOf(cliente.getStatus());
+    }
+
+    public static List<ClienteDTO> converter(List<Cliente> clientes){
+        return clientes.stream().map(ClienteDTO::new).collect(Collectors.toList());
+    };
 }

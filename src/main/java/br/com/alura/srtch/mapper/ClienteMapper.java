@@ -26,7 +26,11 @@ public class ClienteMapper {
             if (cda.getStatus().equals("SUSPENSO")) {
                 statusCliente = StatusCliente.SUSPENSO;
             }
-            clientes.add(new Cliente(cda.getRenda(), dadosPessoais, endereco, statusCliente));
+            clientes.add(new Cliente(   cda.getNome(),
+                                        cda.getRenda(),
+                                        //dadosPessoais,
+                                        //endereco,
+                                        statusCliente));
         }
         return clientes;
     }
@@ -43,7 +47,10 @@ public class ClienteMapper {
         if (clienteDTO.getStatus().equals("SUSPENSO")) {
             statusCliente = StatusCliente.SUSPENSO;
         }
-        return new Cliente(clienteDTO.getRenda(), dadosPessoais, endereco, statusCliente);
+        return new Cliente(clienteDTO.getNome(), clienteDTO.getRenda(),
+                            //dadosPessoais,
+                            //endereco,
+                            statusCliente);
     }
 
     public void alterar(Cliente cliente, ClienteDTO clienteDTO){
