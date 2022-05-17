@@ -17,49 +17,21 @@ public class ClienteDTO {
 
     private Long id;
 
-    @NotBlank
     private String nome;
 
-    @NotBlank
-//    @CPF
     private String cpf;
 
-    @NotBlank
     private String telefone;
 
-    @NotBlank
-    @Email
-    private String email;
+    private String local;
 
-    @NotBlank
-    private String rua;
-
-    @NotBlank
-    private String numero;
-
-    private String complemento;
-
-    @NotBlank
-    private String bairro;
-
-    @NotBlank
-    private String cidade;
-
-    @NotBlank
-    private String estado;
-
-    @NotBlank
-    private String local = cidade + "/" + estado;
-
-
-    @NotBlank
-    private String profissao;
-
-    @NotNull
-    @Min(1)
     private BigDecimal renda;
 
     private String status;
+
+    public Long getId() {
+        return id;
+    }
 
     public String getNome() {
         return nome;
@@ -73,36 +45,8 @@ public class ClienteDTO {
         return telefone;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public String getRua() {
-        return rua;
-    }
-
-    public String getNumero() {
-        return numero;
-    }
-
-    public String getComplemento() {
-        return complemento;
-    }
-
-    public String getBairro() {
-        return bairro;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public String getProfissao() {
-        return profissao;
+    public String getLocal() {
+        return local;
     }
 
     public BigDecimal getRenda() {
@@ -113,80 +57,12 @@ public class ClienteDTO {
         return status;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setRua(String rua) {
-        this.rua = rua;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
-    }
-
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public String getLocal() {
-        return local;
-    }
-
-    public void setLocal(String local) {
-        this.local = local;
-    }
-
-    public void setProfissao(String profissao) {
-        this.profissao = profissao;
-    }
-
-    public void setRenda(BigDecimal renda) {
-        this.renda = renda;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public ClienteDTO(Cliente cliente) {
         this.id = cliente.getId();
         this.nome = cliente.getDadosPessoais().getNome();
         this.cpf = cliente.getDadosPessoais().getCpf();
         this.telefone = cliente.getDadosPessoais().getTelefone();
-        this.local = cliente.getEndereco().getLocal();
+        this.local = cliente.getEndereco().getCidade() + "/" + cliente.getEndereco().getEstado();
         this.renda = cliente.getRenda();
         this.status = String.valueOf(cliente.getStatus());
     }

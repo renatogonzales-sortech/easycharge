@@ -24,14 +24,13 @@ public class Endereco{
     @Column(nullable=false, length=100)
     private String estado;
 
-    private String local = cidade + "/" + estado;
-
     public Endereco() {
     }
 
-    public Endereco(String rua, String numero, String bairro, String cidade, String estado) {
+    public Endereco(String rua, String numero,String complemento, String bairro, String cidade, String estado) {
         this.rua = rua;
         this.numero = numero;
+        this.complemento = complemento;
         this.bairro = bairro;
         this.cidade = cidade;
         this.estado = estado;
@@ -87,13 +86,6 @@ public class Endereco{
         this.estado = estado;
     }
 
-    public String getLocal() {
-        return local;
-    }
-
-    public void setLocal(String local) {
-        this.local = local;
-    }
 
     @Override
     public String toString() {

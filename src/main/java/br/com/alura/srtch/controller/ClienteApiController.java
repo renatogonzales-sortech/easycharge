@@ -29,7 +29,7 @@ public class ClienteApiController {
 
     @PostMapping
     public ResponseEntity<ClienteDTO> cadastrar(@RequestBody ClienteForm form, UriComponentsBuilder uriBuilder) {
-        Cliente cliente = form.converter(clienteRepository);
+        Cliente cliente = form.converter();
         clienteRepository.save(cliente);
 
         URI uri = uriBuilder.path("/clientes/{id}").buildAndExpand(cliente.getId()).toUri();

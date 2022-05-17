@@ -10,31 +10,41 @@ import javax.persistence.Embedded;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 
 public class ClienteForm {
 
+    @NotBlank
     private String nome;
+    @NotBlank
     private String cpf;
+    @NotBlank
     private String email;
+    @NotBlank
     private String telefone;
+    @NotBlank
     private String rua;
+    @NotBlank
     private String numero;
+
     private String complemento;
+    @NotBlank
     private String bairro;
+    @NotBlank
     private String cidade;
+    @NotBlank
     private String estado;
+    @NotBlank
     private String profissao;
+    @NotNull
+    @Positive
     private BigDecimal renda;
-    @Enumerated(EnumType.STRING)
-    @JoinColumn(nullable = false)
+    @NotNull
     private StatusCliente status = StatusCliente.ATIVO;
-
-    @Embedded
-    private DadosPessoais dadosPessoais;
-
-    @Embedded
-    private Endereco endereco;
 
     public String getNome() {
         return nome;
@@ -140,24 +150,9 @@ public class ClienteForm {
         this.status = status;
     }
 
-    public DadosPessoais getDadosPessoais() {
-        return dadosPessoais;
-    }
-
-    public void setDadosPessoais(DadosPessoais dadosPessoais) {
-        this.dadosPessoais = dadosPessoais;
-    }
-
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
-
-    public Cliente converter(ClienteRepository clienteRepository) {
-        Cliente cliente = (Cliente) clienteRepository.findAll();
-        return new Cliente(nome, renda, status);
+    public Cliente converter() {
+        DadosPessoais dadosPessoais = new DadosPessoais(cpf, nome, profissao, telefone, email);
+        Endereco endereco = new Endereco(rua, numero, complemento, bairro, cidade, estado);
+        return new Cliente(renda, dadosPessoais, endereco, status);
     }
 }

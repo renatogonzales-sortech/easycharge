@@ -31,15 +31,13 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(String nome,
-                   BigDecimal renda,
-                   //DadosPessoais dadosPessoais,
-                   //Endereco endereco,
+    public Cliente(BigDecimal renda,
+                   DadosPessoais dadosPessoais,
+                   Endereco endereco,
                    StatusCliente status) {
-        this.dadosPessoais.getNome();
         this.renda = renda;
-       // this.dadosPessoais = dadosPessoais;
-       // this.endereco = endereco;
+        this.dadosPessoais = dadosPessoais;
+        this.endereco = endereco;
         this.status = status;
     }
 
