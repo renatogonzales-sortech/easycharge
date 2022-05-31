@@ -40,12 +40,14 @@ public class Divida {
     public Divida() {
     }
 
-    public Divida(BigDecimal valorDaDivida,StatusDivida status, Cliente cliente) {
+    public Divida(BigDecimal valorDaDivida,LocalDate dataDeAbertura,StatusDivida status, Cliente cliente) {
         this.valor = valorDaDivida;
-        this.dataDeAbertura = LocalDate.now();
+        this.dataDeAbertura = dataDeAbertura;
         this.status = status;
         this.cliente = cliente;
     }
+
+
 
     public void adicionarCobranca(Cobranca cobranca){
         cobranca.setDivida(this);
